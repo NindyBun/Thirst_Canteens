@@ -1,16 +1,13 @@
 package com.NindyBun.watercanteens;
 
 import com.NindyBun.watercanteens.data.Generator;
-import com.NindyBun.watercanteens.items.Canteen;
+import com.NindyBun.watercanteens.items.EmptyCanteen;
 import com.NindyBun.watercanteens.registries.RegComponents;
 import com.NindyBun.watercanteens.registries.RegItems;
 import com.NindyBun.watercanteens.registries.RegTabs;
-import net.minecraft.client.color.item.ItemColor;
+import dev.ghen.thirst.foundation.common.event.RegisterThirstValueEvent;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import org.checkerframework.checker.units.qual.C;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -25,8 +22,6 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-
-import java.awt.*;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(WaterCanteens.MODID)
@@ -47,6 +42,22 @@ public class WaterCanteens {
         NeoForge.EVENT_BUS.register(this);
     }
 
+    @SubscribeEvent
+    public void registerDrinks(RegisterThirstValueEvent event) {
+        event.addDrink(RegItems.FILLED_LEATHER_CANTEEN.get(), 6, 8);
+        event.addDrink(RegItems.FILLED_IRON_CANTEEN.get(), 6, 8);
+        event.addDrink(RegItems.FILLED_GOLD_CANTEEN.get(), 6, 8);
+        event.addDrink(RegItems.FILLED_DIAMOND_CANTEEN.get(), 6, 8);
+        event.addDrink(RegItems.FILLED_NETHERITE_CANTEEN.get(), 6, 8);
+        event.addDrink(RegItems.FILLED_DRAGON_CANTEEN.get(), 6, 8);
+        event.addContainer(RegItems.FILLED_LEATHER_CANTEEN.get());
+        event.addContainer(RegItems.FILLED_IRON_CANTEEN.get());
+        event.addContainer(RegItems.FILLED_GOLD_CANTEEN.get());
+        event.addContainer(RegItems.FILLED_DIAMOND_CANTEEN.get());
+        event.addContainer(RegItems.FILLED_NETHERITE_CANTEEN.get());
+        event.addContainer(RegItems.FILLED_DRAGON_CANTEEN.get());
+    }
+
     private void commonSetup(FMLCommonSetupEvent event) {
     }
 
@@ -61,14 +72,7 @@ public class WaterCanteens {
     static class ClientModEvents {
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
-            event.enqueueWork(() -> {
-                ItemProperties.register(RegItems.LEATHER_CANTEEN.get(), ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), Canteen::getHasWater);
-                ItemProperties.register(RegItems.IRON_CANTEEN.get(), ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), Canteen::getHasWater);
-                ItemProperties.register(RegItems.GOLD_CANTEEN.get(), ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), Canteen::getHasWater);
-                ItemProperties.register(RegItems.DIAMOND_CANTEEN.get(), ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), Canteen::getHasWater);
-                ItemProperties.register(RegItems.NETHERITE_CANTEEN.get(), ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), Canteen::getHasWater);
-                ItemProperties.register(RegItems.DRAGON_CANTEEN.get(), ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), Canteen::getHasWater);
-            });
+
         }
     }
 }

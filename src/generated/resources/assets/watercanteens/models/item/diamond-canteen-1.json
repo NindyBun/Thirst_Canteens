@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "watercanteens:item/canteen-bottle-diamond",
-    "layer1": "watercanteens:item/canteen-handle",
-    "layer2": "watercanteens:item/canteen-waterdrip"
-  }
-}

@@ -1,9 +1,15 @@
 {
-  "item.watercanteens.diamond-canteen": "Diamond Canteen",
-  "item.watercanteens.dragon-canteen": "Dragon Canteen",
-  "item.watercanteens.gold-canteen": "Gold Canteen",
-  "item.watercanteens.iron-canteen": "Iron Canteen",
-  "item.watercanteens.leather-canteen": "Leather Canteen",
-  "item.watercanteens.netherite-canteen": "Netherite Canteen",
+  "item.watercanteens.empty-diamond-canteen": "Empty Diamond Canteen",
+  "item.watercanteens.empty-dragon-canteen": "Empty Dragon Canteen",
+  "item.watercanteens.empty-gold-canteen": "Empty Gold Canteen",
+  "item.watercanteens.empty-iron-canteen": "Empty Iron Canteen",
+  "item.watercanteens.empty-leather-canteen": "Empty Leather Canteen",
+  "item.watercanteens.empty-netherite-canteen": "Empty Netherite Canteen",
+  "item.watercanteens.filled-diamond-canteen": "Filled Diamond Canteen",
+  "item.watercanteens.filled-dragon-canteen": "Filled Dragon Canteen",
+  "item.watercanteens.filled-gold-canteen": "Filled Gold Canteen",
+  "item.watercanteens.filled-iron-canteen": "Filled Iron Canteen",
+  "item.watercanteens.filled-leather-canteen": "Filled Leather Canteen",
+  "item.watercanteens.filled-netherite-canteen": "Filled Netherite Canteen",
   "itemGroup.watercanteens.watercanteens_tab": "Water Canteens"
 }

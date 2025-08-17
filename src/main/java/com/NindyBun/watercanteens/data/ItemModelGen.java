@@ -18,67 +18,73 @@ public class ItemModelGen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        String name = RegItems.LEATHER_CANTEEN.getId().getPath();
+        String name = RegItems.EMPTY_LEATHER_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-leather"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"));
+
+        name = RegItems.FILLED_LEATHER_CANTEEN.getId().getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-leather"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), 1f)
-                .model(withExistingParent(name+"-1", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-leather"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                        .texture("layer2", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip")));
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
 
-        name = RegItems.IRON_CANTEEN.getId().getPath();
+        name = RegItems.EMPTY_IRON_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-iron"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"));
+
+        name = RegItems.FILLED_IRON_CANTEEN.getId().getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-iron"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), 1f)
-                .model(withExistingParent(name+"-1", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-iron"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                        .texture("layer2", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip")));
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
 
-        name = RegItems.GOLD_CANTEEN.getId().getPath();
+        name = RegItems.EMPTY_GOLD_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-gold"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"));
+
+        name = RegItems.FILLED_GOLD_CANTEEN.getId().getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-gold"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), 1f)
-                .model(withExistingParent(name+"-1", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-gold"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                        .texture("layer2", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip")));
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
 
-        name = RegItems.DIAMOND_CANTEEN.getId().getPath();
+        name = RegItems.EMPTY_DIAMOND_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-diamond"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"));
+
+        name = RegItems.FILLED_DIAMOND_CANTEEN.getId().getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-diamond"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), 1f)
-                .model(withExistingParent(name+"-1", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-diamond"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                        .texture("layer2", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip")));
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
 
-        name = RegItems.NETHERITE_CANTEEN.getId().getPath();
+        name = RegItems.EMPTY_NETHERITE_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-netherite"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"));
+
+        name = RegItems.FILLED_NETHERITE_CANTEEN.getId().getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-netherite"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), 1f)
-                .model(withExistingParent(name+"-1", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-netherite"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                        .texture("layer2", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip")));
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
 
-        name = RegItems.DRAGON_CANTEEN.getId().getPath();
+        name = RegItems.EMPTY_DRAGON_CANTEEN.getId().getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-netherite"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                .texture("layer2", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-eye"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "water"), 1f)
-                .model(withExistingParent(name+"-1", mcLoc("item/generated"))
-                        .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-netherite"))
-                        .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
-                        .texture("layer2", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-eye"))
-                        .texture("layer3", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip")));
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-eye"));
+
+        name = RegItems.FILLED_DRAGON_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-netherite"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
+
     }
 
 }

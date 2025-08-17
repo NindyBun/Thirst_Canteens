@@ -1,13 +1,13 @@
-// 1.21.1	2025-08-16T07:09:29.8203842	Item Models: watercanteens
-44a91bda68134bb9fa89d04412d221c2cfc97bf7 assets/watercanteens/models/item/diamond-canteen-1.json
-0d2562c9c2102cba43cfc10a36221996fdc8e38b assets/watercanteens/models/item/diamond-canteen.json
-ac0c338fe4a7ef633cc4d15f219946bf0f3d2c42 assets/watercanteens/models/item/dragon-canteen-1.json
-18f868cd7d2316d6da9ad55d8f2978dfe5151ce0 assets/watercanteens/models/item/dragon-canteen.json
-ae4ce7903111098d1ce9a2c546bf323a2a9a0a65 assets/watercanteens/models/item/gold-canteen-1.json
-9e67b5e0ec7932ece93f020beb29cae51f38cda3 assets/watercanteens/models/item/gold-canteen.json
-c9d13d391684858e1091d17ff82d87a4219ae409 assets/watercanteens/models/item/iron-canteen-1.json
-c9a43cfccec3fe2ec7e4b29dd0189dea34cf2502 assets/watercanteens/models/item/iron-canteen.json
-d36b757505af2c97ff0976df0991368f7bd37e30 assets/watercanteens/models/item/leather-canteen-1.json
-0a12a8d40eb181c34eb4bd01babb53aae51bf1c6 assets/watercanteens/models/item/leather-canteen.json
-43648a8968eb3b94936700cfd0cc9e1cdddb0872 assets/watercanteens/models/item/netherite-canteen-1.json
-0466b35920c494bbb77963c3651f4f505afaa965 assets/watercanteens/models/item/netherite-canteen.json
+// 1.21.1	2025-08-17T06:44:22.7604933	Item Models: watercanteens
+9adca2c698a1d2edc17fd337e9d451649ae007a9 assets/watercanteens/models/item/empty-diamond-canteen.json
+98323b56ae5495c3491345cf5e5afe524567803f assets/watercanteens/models/item/empty-dragon-canteen.json
+41a1a50571acffedccede788228a07f1213943ee assets/watercanteens/models/item/empty-gold-canteen.json
+9425f8b5991e010e7f433114ed112324a12c8918 assets/watercanteens/models/item/empty-iron-canteen.json
+2fe8237b2f0645942fccf8372847604b9664ed4b assets/watercanteens/models/item/empty-leather-canteen.json
+c3fc07082048e39d964db2e6190a6ddb027ef000 assets/watercanteens/models/item/empty-netherite-canteen.json
+2a8d342a717070ae07b011571b91bd1ab3686ba6 assets/watercanteens/models/item/filled-diamond-canteen.json
+25c26264868f61b871c078f41b5357a832415fec assets/watercanteens/models/item/filled-dragon-canteen.json
+334ec0862f9303c5a285dfa365c0fe444d9bc625 assets/watercanteens/models/item/filled-gold-canteen.json
+469c0810055d452ff19fe27fe734dedda7cd71c3 assets/watercanteens/models/item/filled-iron-canteen.json
+dfefd8c569c13f44a2fdcda4850bcbe2b77142e4 assets/watercanteens/models/item/filled-leather-canteen.json
+25c26264868f61b871c078f41b5357a832415fec assets/watercanteens/models/item/filled-netherite-canteen.json

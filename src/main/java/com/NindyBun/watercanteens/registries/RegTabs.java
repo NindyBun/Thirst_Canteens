@@ -13,7 +13,7 @@ public class RegTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_TAB = TABS.register("creative_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable(Utilities.addModID("itemGroup", "watercanteens_tab")))
-            .icon(() -> RegItems.LEATHER_CANTEEN.get().getDefaultInstance())
+            .icon(() -> RegItems.EMPTY_LEATHER_CANTEEN.get().getDefaultInstance())
             .displayItems(((itemDisplayParameters, output) -> {
                 RegItems.ITEMS.getEntries().forEach((itemDeferredHolder -> output.accept(itemDeferredHolder.get())));
             }))
