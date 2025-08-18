@@ -1,13 +1,10 @@
 package com.NindyBun.watercanteens;
 
 import com.NindyBun.watercanteens.data.Generator;
-import com.NindyBun.watercanteens.items.EmptyCanteen;
-import com.NindyBun.watercanteens.registries.RegComponents;
 import com.NindyBun.watercanteens.registries.RegItems;
+import com.NindyBun.watercanteens.registries.RegRecipes;
 import com.NindyBun.watercanteens.registries.RegTabs;
 import dev.ghen.thirst.foundation.common.event.RegisterThirstValueEvent;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -34,9 +31,9 @@ public class WaterCanteens {
     public WaterCanteens(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
 
-        RegComponents.COMPONENTS.register(modEventBus);
         RegItems.ITEMS.register(modEventBus);
         RegTabs.TABS.register(modEventBus);
+        RegRecipes.RECIPES.register(modEventBus);
 
         modEventBus.addListener(Generator::gatherData);
         NeoForge.EVENT_BUS.register(this);
@@ -46,12 +43,14 @@ public class WaterCanteens {
     public void registerDrinks(RegisterThirstValueEvent event) {
         event.addDrink(RegItems.FILLED_LEATHER_CANTEEN.get(), 6, 8);
         event.addDrink(RegItems.FILLED_IRON_CANTEEN.get(), 6, 8);
+        event.addDrink(RegItems.FILLED_COPPER_CANTEEN.get(), 6, 8);
         event.addDrink(RegItems.FILLED_GOLD_CANTEEN.get(), 6, 8);
         event.addDrink(RegItems.FILLED_DIAMOND_CANTEEN.get(), 6, 8);
         event.addDrink(RegItems.FILLED_NETHERITE_CANTEEN.get(), 6, 8);
         event.addDrink(RegItems.FILLED_DRAGON_CANTEEN.get(), 6, 8);
         event.addContainer(RegItems.FILLED_LEATHER_CANTEEN.get());
         event.addContainer(RegItems.FILLED_IRON_CANTEEN.get());
+        event.addContainer(RegItems.FILLED_COPPER_CANTEEN.get());
         event.addContainer(RegItems.FILLED_GOLD_CANTEEN.get());
         event.addContainer(RegItems.FILLED_DIAMOND_CANTEEN.get());
         event.addContainer(RegItems.FILLED_NETHERITE_CANTEEN.get());

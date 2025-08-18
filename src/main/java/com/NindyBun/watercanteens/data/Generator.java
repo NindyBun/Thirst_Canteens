@@ -22,6 +22,7 @@ public class Generator {
 
         generator.addProvider(event.includeClient(), new LangGen(output, "en_us"));
         generator.addProvider(event.includeClient(), new ItemModelGen(output, helper));
+        generator.addProvider(event.includeServer(), new RecipeGen(output, provider));
 
     }
 }

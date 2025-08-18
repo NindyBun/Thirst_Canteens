@@ -40,6 +40,17 @@ public class ItemModelGen extends ItemModelProvider {
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
 
+        name = RegItems.EMPTY_COPPER_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-copper"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"));
+
+        name = RegItems.FILLED_COPPER_CANTEEN.getId().getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-copper"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
+
         name = RegItems.EMPTY_GOLD_CANTEEN.getId().getPath();
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-gold"))
@@ -83,6 +94,7 @@ public class ItemModelGen extends ItemModelProvider {
         withExistingParent(name, mcLoc("item/generated"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-bottle-netherite"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-handle"))
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-eye"))
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(WaterCanteens.MODID, "item/canteen-waterdrip"));
 
     }

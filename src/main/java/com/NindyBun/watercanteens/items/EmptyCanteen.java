@@ -1,36 +1,25 @@
 package com.NindyBun.watercanteens.items;
 
 import com.NindyBun.watercanteens.WaterCanteens;
-import com.NindyBun.watercanteens.registries.RegComponents;
+import com.NindyBun.watercanteens.helpers.Utilities;
 import com.NindyBun.watercanteens.registries.RegItems;
 import dev.ghen.thirst.content.purity.WaterPurity;
 import dev.ghen.thirst.foundation.util.MathHelper;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
@@ -51,7 +40,6 @@ public class EmptyCanteen extends Item {
         BlockState blockState = level.getBlockState(blockPos);
         int needed = this.canteenTier.getMaxUses();
         ItemStack filled = ItemStack.EMPTY;
-        boolean handled = false;
 
         if (this.canteenTier.equals(CanteenTiers.LEATHER)) {
             filled = RegItems.FILLED_LEATHER_CANTEEN.get().getDefaultInstance();
@@ -67,8 +55,50 @@ public class EmptyCanteen extends Item {
             filled = RegItems.FILLED_DRAGON_CANTEEN.get().getDefaultInstance();
         }
 
-        if (level.getFluidState(blockPos).is(FluidTags.WATER)) {
+        int[] fill = Utilities.fillCanteen(stack, needed, level, blockPos, blockEntity, blockState);
+        if (fill[2] == 1) {
+            WaterPurity.addPurity(filled, fill[0]);
+            filled.setDamageValue(fill[1]);
+            player.setItemInHand(hand, filled);
+            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+        }
+
+        /*if (level.getFluidState(blockPos).is(FluidTags.WATER)) {
             filled.setDamageValue(0);
+            handled = true;
+        } else if (blockEntity != null) {
+            IFluidHandler fluidHandler = Capabilities.FluidHandler.BLOCK.getCapability(level, blockPos, blockState, blockEntity, null);
+            if (fluidHandler != null) {
+                int totalAmount = 0;
+                for (int i = 0; i < fluidHandler.getTanks(); i++) {
+                    if (fluidHandler.getFluidInTank(i).getFluid() != Fluids.WATER) {
+                        break;
+                    } else {
+                        totalAmount += fluidHandler.getFluidInTank(i).getAmount();
+                    }
+                }
+                totalAmount /= 250;
+                int actual = Math.min(needed, totalAmount);
+                if (actual <= 0) {
+                    return InteractionResultHolder.pass(stack);
+                }
+                fluidHandler.drain(actual*250, IFluidHandler.FluidAction.EXECUTE);
+                filled.setDamageValue(Math.max(0, needed - actual));
+                handled = true;
+            }
+        } else if (blockState.getBlock() instanceof LayeredCauldronBlock) {
+            int waterLevel = blockState.getValue(LayeredCauldronBlock.LEVEL);
+            int actual = Math.min(needed, waterLevel);
+            if (actual <= 0) {
+                return InteractionResultHolder.pass(stack);
+            }
+            if (waterLevel - actual > 0) {
+                blockState.setValue(LayeredCauldronBlock.LEVEL, waterLevel - actual);
+            } else {
+                blockState = Blocks.CAULDRON.defaultBlockState();
+            }
+            level.setBlockAndUpdate(blockPos, blockState);
+            filled.setDamageValue(Math.max(0, needed - actual));
             handled = true;
         }
 
@@ -76,7 +106,7 @@ public class EmptyCanteen extends Item {
             WaterPurity.addPurity(filled, Math.max(this.canteenTier.getPurity(), WaterPurity.getBlockPurity(level, blockPos)));
             player.setItemInHand(hand, filled);
             level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
-        }
+        }*/
 
         return InteractionResultHolder.success(stack);
     }
@@ -89,5 +119,7 @@ public class EmptyCanteen extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.literal("0 / " + this.canteenTier.getMaxUses()).withColor(Color.CYAN.darker().getRGB()));
+        if (this.canteenTier.equals(CanteenTiers.DRAGON))
+            tooltipComponents.add(Component.translatable("tooltip." + WaterCanteens.MODID + ".dragon-canteen-purity").withColor(Color.GRAY.darker().getRGB()));
     }
 }

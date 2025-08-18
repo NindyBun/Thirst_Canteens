@@ -1,0 +1,39 @@
+package com.NindyBun.watercanteens.data.recipies;
+
+import com.NindyBun.watercanteens.items.FilledCanteen;
+import com.NindyBun.watercanteens.registries.RegRecipes;
+import dev.ghen.thirst.content.registry.ThirstComponent;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
+
+public class CanteenSmeltingRecipe extends SmeltingRecipe {
+    public CanteenSmeltingRecipe(String group, CookingBookCategory category, Ingredient ingredient, ItemStack result, float exp, int time) {
+        super(group, category, ingredient, result, exp, time);
+    }
+
+    @Override
+    public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider registries) {
+        ItemStack stack = input.item();
+        if(stack.get(ThirstComponent.PURITY)==null){
+            if(stack.getItem() instanceof FilledCanteen canteen)
+                stack.set(ThirstComponent.PURITY,canteen.getCanteenTier().getPurity());
+        }
+        int purity = Math.min(stack.get(ThirstComponent.PURITY)+2,3);
+
+        ItemStack result = this.result.copy();
+
+        result.set(ThirstComponent.PURITY,purity);
+        result.set(DataComponents.DAMAGE,stack.getDamageValue());
+
+        return result;
+    }
+
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return RegRecipes.CANTEEN_SMELTING_RECIPE.get();
+    }
+
+
+}
