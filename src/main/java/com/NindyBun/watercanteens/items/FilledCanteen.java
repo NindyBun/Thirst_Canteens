@@ -1,7 +1,11 @@
 package com.NindyBun.watercanteens.items;
 
+import com.NindyBun.watercanteens.WaterCanteens;
 import com.NindyBun.watercanteens.helpers.Utilities;
+import com.NindyBun.watercanteens.registries.RegItems;
+import dev.ghen.thirst.Thirst;
 import dev.ghen.thirst.content.purity.WaterPurity;
+import dev.ghen.thirst.content.registry.ThirstComponent;
 import dev.ghen.thirst.content.thirst.PlayerThirst;
 import dev.ghen.thirst.foundation.util.MathHelper;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -34,8 +38,8 @@ public class FilledCanteen extends Item implements Drinkable{
     private final CanteenTiers canteenTier;
     private Item emptyCanteen;
 
-    public FilledCanteen(CanteenTiers canteenTier) {
-        super(new Properties().stacksTo(1).durability(canteenTier.getMaxUses()));
+    public FilledCanteen(CanteenTiers canteenTier, int purity) {
+        super(new Properties().stacksTo(1).durability(canteenTier.getMaxUses()).component(ThirstComponent.PURITY, purity));
         this.canteenTier = canteenTier;
     }
 
@@ -67,21 +71,49 @@ public class FilledCanteen extends Item implements Drinkable{
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         BlockState blockState = level.getBlockState(blockPos);
         int needed = stack.getDamageValue();
-
-        int[] fill = Utilities.fillCanteen(stack, needed, level, blockPos, blockEntity, blockState);
+        ItemStack filled = stack;
+        /*
+            @fill[0] = purity
+            @fill[1] = damage value
+            @fill[2] = handled
+        */
+        int[] fill = Utilities.fillCanteen(filled, needed, level, blockPos, blockEntity, blockState);
         if (fill[2] == 1) {
-            WaterPurity.addPurity(stack, Math.max(this.canteenTier.getPurity(), fill[0]));
-            stack.setDamageValue(fill[1]);
+            if (WaterPurity.getPurity(filled) != fill[0]) {
+                if (this.canteenTier.equals(CanteenTiers.LEATHER)) {
+                    filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[0]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+                } else if (this.canteenTier.equals(CanteenTiers.IRON)) {
+                    filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[1]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+                } else if (this.canteenTier.equals(CanteenTiers.COPPER)) {
+                    filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[2]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+                } else if (this.canteenTier.equals(CanteenTiers.GOLD)) {
+                    filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[3]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+                } else if (this.canteenTier.equals(CanteenTiers.DIAMOND)) {
+                    filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[4]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+                } else if (this.canteenTier.equals(CanteenTiers.NETHERITE)) {
+                    filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[5]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+                } else if (this.canteenTier.equals(CanteenTiers.DRAGON)) {
+                    filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[6]).get(RegItems.PURITY[Math.max(fill[0], this.canteenTier.getPurity())]).get().getDefaultInstance();
+                }
+            }
+            filled.setDamageValue(fill[1]);
             level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
         }
 
         player.startUsingItem(hand);
-        return InteractionResultHolder.consume(stack);
+        return InteractionResultHolder.consume(filled);
+    }
+
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return this.canteenTier == CanteenTiers.DRAGON;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         tooltipComponents.add(Component.literal(this.getRemainingUses(stack) + " / " + this.canteenTier.getMaxUses()).withColor(Color.CYAN.darker().getRGB()));
+        if (this.canteenTier.equals(CanteenTiers.DRAGON))
+            tooltipComponents.add(Component.translatable("tooltip." + WaterCanteens.MODID + ".dragon-canteen-purity").withColor(Color.GRAY.darker().getRGB()));
     }
 
     @Override

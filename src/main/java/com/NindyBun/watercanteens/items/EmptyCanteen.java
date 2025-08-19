@@ -39,10 +39,38 @@ public class EmptyCanteen extends Item {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         BlockState blockState = level.getBlockState(blockPos);
         int needed = this.canteenTier.getMaxUses();
-        ItemStack filled = ItemStack.EMPTY;
+        /*
+            @fill[0] = purity
+            @fill[1] = damage value
+            @fill[2] = handled
+        */
+        int[] fill = Utilities.fillCanteen(stack, needed, level, blockPos, blockEntity, blockState);
+        if (fill[2] == 1) {
+            ItemStack filled = ItemStack.EMPTY;
+            if (this.canteenTier.equals(CanteenTiers.LEATHER)) {
+                filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[0]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+            } else if (this.canteenTier.equals(CanteenTiers.IRON)) {
+                filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[1]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+            } else if (this.canteenTier.equals(CanteenTiers.COPPER)) {
+                filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[2]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+            } else if (this.canteenTier.equals(CanteenTiers.GOLD)) {
+                filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[3]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+            } else if (this.canteenTier.equals(CanteenTiers.DIAMOND)) {
+                filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[4]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+            } else if (this.canteenTier.equals(CanteenTiers.NETHERITE)) {
+                filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[5]).get(RegItems.PURITY[fill[0]]).get().getDefaultInstance();
+            } else if (this.canteenTier.equals(CanteenTiers.DRAGON)) {
+                filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[6]).get(RegItems.PURITY[Math.max(fill[0], this.canteenTier.getPurity())]).get().getDefaultInstance();
+            }
+            filled.setDamageValue(fill[1]);
+            player.setItemInHand(hand, filled);
+            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+        }
+
+        /*ItemStack filled = ItemStack.EMPTY;
 
         if (this.canteenTier.equals(CanteenTiers.LEATHER)) {
-            filled = RegItems.FILLED_LEATHER_CANTEEN.get().getDefaultInstance();
+            filled = RegItems.FILLED_CANTEENS.get(RegItems.MATERIAL[0]).get();
         } else if (this.canteenTier.equals(CanteenTiers.IRON)) {
             filled = RegItems.FILLED_IRON_CANTEEN.get().getDefaultInstance();
         } else if (this.canteenTier.equals(CanteenTiers.GOLD)) {
@@ -59,51 +87,6 @@ public class EmptyCanteen extends Item {
         if (fill[2] == 1) {
             WaterPurity.addPurity(filled, fill[0]);
             filled.setDamageValue(fill[1]);
-            player.setItemInHand(hand, filled);
-            level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
-        }
-
-        /*if (level.getFluidState(blockPos).is(FluidTags.WATER)) {
-            filled.setDamageValue(0);
-            handled = true;
-        } else if (blockEntity != null) {
-            IFluidHandler fluidHandler = Capabilities.FluidHandler.BLOCK.getCapability(level, blockPos, blockState, blockEntity, null);
-            if (fluidHandler != null) {
-                int totalAmount = 0;
-                for (int i = 0; i < fluidHandler.getTanks(); i++) {
-                    if (fluidHandler.getFluidInTank(i).getFluid() != Fluids.WATER) {
-                        break;
-                    } else {
-                        totalAmount += fluidHandler.getFluidInTank(i).getAmount();
-                    }
-                }
-                totalAmount /= 250;
-                int actual = Math.min(needed, totalAmount);
-                if (actual <= 0) {
-                    return InteractionResultHolder.pass(stack);
-                }
-                fluidHandler.drain(actual*250, IFluidHandler.FluidAction.EXECUTE);
-                filled.setDamageValue(Math.max(0, needed - actual));
-                handled = true;
-            }
-        } else if (blockState.getBlock() instanceof LayeredCauldronBlock) {
-            int waterLevel = blockState.getValue(LayeredCauldronBlock.LEVEL);
-            int actual = Math.min(needed, waterLevel);
-            if (actual <= 0) {
-                return InteractionResultHolder.pass(stack);
-            }
-            if (waterLevel - actual > 0) {
-                blockState.setValue(LayeredCauldronBlock.LEVEL, waterLevel - actual);
-            } else {
-                blockState = Blocks.CAULDRON.defaultBlockState();
-            }
-            level.setBlockAndUpdate(blockPos, blockState);
-            filled.setDamageValue(Math.max(0, needed - actual));
-            handled = true;
-        }
-
-        if (handled) {
-            WaterPurity.addPurity(filled, Math.max(this.canteenTier.getPurity(), WaterPurity.getBlockPurity(level, blockPos)));
             player.setItemInHand(hand, filled);
             level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
         }*/

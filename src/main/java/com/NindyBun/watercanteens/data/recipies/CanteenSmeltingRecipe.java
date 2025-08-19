@@ -1,5 +1,6 @@
 package com.NindyBun.watercanteens.data.recipies;
 
+import com.NindyBun.watercanteens.data.recipies.CookingRecipe.CanteenCookingRecipe;
 import com.NindyBun.watercanteens.items.FilledCanteen;
 import com.NindyBun.watercanteens.registries.RegRecipes;
 import dev.ghen.thirst.content.registry.ThirstComponent;
@@ -9,6 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 
 public class CanteenSmeltingRecipe extends SmeltingRecipe {
+    /*public CanteenSmeltingRecipe(String group, CookingBookCategory category, ItemStack ingredient, ItemStack result, float exp, int time) {
+        super(RecipeType.SMELTING, group, category, ingredient, result, exp, time);
+    }*/
+
     public CanteenSmeltingRecipe(String group, CookingBookCategory category, Ingredient ingredient, ItemStack result, float exp, int time) {
         super(group, category, ingredient, result, exp, time);
     }
@@ -21,10 +26,8 @@ public class CanteenSmeltingRecipe extends SmeltingRecipe {
                 stack.set(ThirstComponent.PURITY,canteen.getCanteenTier().getPurity());
         }
         int purity = Math.min(stack.get(ThirstComponent.PURITY)+2,3);
-
         ItemStack result = this.result.copy();
-
-        result.set(ThirstComponent.PURITY,purity);
+        result.set(ThirstComponent.PURITY, purity);
         result.set(DataComponents.DAMAGE,stack.getDamageValue());
 
         return result;
