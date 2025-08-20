@@ -47,13 +47,15 @@ public class RegItems {
             int finalI = i;
 
             for (int ii = 0; ii < PURITY.length; ii++) {
+                int finalIi = ii;
                 if (!RegItems.MATERIAL[i].equals("dragon")) {
                     canteens.put(PURITY[ii], ITEMS.register("filled-" + MATERIAL[i] + "-canteen-" + PURITY[ii],
-                            () -> new FilledCanteen(tier, tier.getPurity()).setEmptyCanteen(EMPTY_CANTEENS.get(MATERIAL[finalI]).get())));
+                            () -> new FilledCanteen(tier, finalIi).setEmptyCanteen(EMPTY_CANTEENS.get(MATERIAL[finalI]).get())));
                 } else if (ii >= 2) {
                     canteens.put(PURITY[ii], ITEMS.register("filled-" + MATERIAL[i] + "-canteen-" + PURITY[ii],
-                            () -> new FilledCanteen(tier, tier.getPurity()).setEmptyCanteen(EMPTY_CANTEENS.get(MATERIAL[finalI]).get())));
+                            () -> new FilledCanteen(tier, finalIi).setEmptyCanteen(EMPTY_CANTEENS.get(MATERIAL[finalI]).get())));
                 }
+                //WaterPurity.addPurity(canteens.get(PURITY[ii]).get().getDefaultInstance(), ii);
             }
             FILLED_CANTEENS.put(MATERIAL[i], canteens);
         }

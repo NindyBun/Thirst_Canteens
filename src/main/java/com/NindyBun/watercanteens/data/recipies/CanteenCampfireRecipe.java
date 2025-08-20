@@ -31,6 +31,7 @@ public class CanteenCampfireRecipe extends CampfireCookingRecipe {
         int purity = Math.min(stack.get(ThirstComponent.PURITY)+1,3);
         ItemStack result = this.result.copy();
         result.set(ThirstComponent.PURITY, purity);
+        result.set(DataComponents.DAMAGE, stack.getDamageValue());
 
         return result;
     }
